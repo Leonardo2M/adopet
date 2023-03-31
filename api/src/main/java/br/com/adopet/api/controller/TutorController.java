@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/tutor")
+@RequestMapping("/tutores")
 public class TutorController {
 
     private final TutorService service;
@@ -13,5 +13,7 @@ public class TutorController {
     public TutorController(TutorService service) {
         this.service = service;
     }
+
+
 
 }
