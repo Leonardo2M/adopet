@@ -27,4 +27,12 @@ public class TutorService {
         return ResponseEntity.ok().body(modelMapper.map(tutor, TutorDTO.class));
     }
 
+    public ResponseEntity<TutorDTO> buscarPorId(Long id) {
+        if(!repository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        var tutor = repository.getReferenceById(id);
+        return ResponseEntity.ok().body(modelMapper.map(tutor, TutorDTO.class));
+    }
 }
