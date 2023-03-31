@@ -5,10 +5,7 @@ import br.com.adopet.api.dto.DadosCadastroTutor;
 import br.com.adopet.api.dto.TutorDTO;
 import jakarta.transaction.Transactional;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/tutores")
@@ -24,6 +21,11 @@ public class TutorController {
     @Transactional
     public ResponseEntity<TutorDTO> criarTutor(@RequestBody DadosCadastroTutor dados) {
         return service.criarTutor(dados);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<TutorDTO> buscarPorId(@PathVariable Long id) {
+        return service.buscarPorId(id);
     }
 
 }
