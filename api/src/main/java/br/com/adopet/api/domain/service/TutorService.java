@@ -3,12 +3,15 @@ package br.com.adopet.api.domain.service;
 import br.com.adopet.api.domain.model.Tutor;
 import br.com.adopet.api.domain.repository.TutorRepository;
 import br.com.adopet.api.dto.DadosCadastroTutor;
+import br.com.adopet.api.dto.DadosListagemTutor;
 import br.com.adopet.api.dto.TutorDTO;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Service
 public class TutorService {
@@ -36,4 +39,13 @@ public class TutorService {
         return ResponseEntity.ok().body(modelMapper.map(tutor, TutorDTO.class));
     }
 
+    public ResponseEntity<List<DadosListagemTutor>> buscarTodos() {
+        var tutores = repository.findAll().stream().map(t -> modelMapper.map(t, DadosListagemTutor.class)).toList();
+
+        if(tutores.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok().body(tutores);
+    }
 }
