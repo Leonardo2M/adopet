@@ -2,10 +2,12 @@ package br.com.adopet.api.domain.service;
 
 import br.com.adopet.api.domain.model.Tutor;
 import br.com.adopet.api.domain.repository.TutorRepository;
+import br.com.adopet.api.dto.DadosAtualizarTutor;
 import br.com.adopet.api.dto.DadosCadastroTutor;
 import br.com.adopet.api.dto.DadosListagemTutor;
 import br.com.adopet.api.dto.TutorDTO;
 import jakarta.transaction.Transactional;
+import org.apache.coyote.Response;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -48,4 +50,16 @@ public class TutorService {
 
         return ResponseEntity.ok().body(tutores);
     }
+
+    public ResponseEntity<TutorDTO> atualizar(DadosAtualizarTutor dados, Long id) {
+        if(!repository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        var tutor = repository.getReferenceById(id);
+        tutor.atualizar(dados);
+
+        return ResponseEntity.ok().body(modelMapper.map(tutor, TutorDTO.class));
+    }
+
 }

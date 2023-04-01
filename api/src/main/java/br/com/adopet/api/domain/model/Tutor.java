@@ -1,5 +1,6 @@
 package br.com.adopet.api.domain.model;
 
+import br.com.adopet.api.dto.DadosAtualizarTutor;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,4 +23,18 @@ public class Tutor {
     private String cidade;
     private String sobre;
 
+    public void atualizar(DadosAtualizarTutor dados) {
+        if(dados.getNome() != null){
+            this.nome = dados.getNome();
+        }
+        if(dados.getTelefone() != null){
+            this.telefone = dados.getTelefone();
+        }
+        if(dados.getCidade() != null){
+            this.cidade = dados.getCidade();
+        }
+        if(dados.getSobre() != null){
+            this.sobre = dados.getSobre();
+        }
+    }
 }
