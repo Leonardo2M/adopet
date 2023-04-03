@@ -1,6 +1,7 @@
 package br.com.adopet.api.controller;
 
 import br.com.adopet.api.domain.service.TutorService;
+import br.com.adopet.api.dto.DadosAtualizarTutor;
 import br.com.adopet.api.dto.DadosCadastroTutor;
 import br.com.adopet.api.dto.DadosListagemTutor;
 import br.com.adopet.api.dto.TutorDTO;
@@ -34,5 +35,11 @@ public class TutorController {
     @GetMapping()
     public ResponseEntity<List<DadosListagemTutor>> buscarPorId() {
         return service.buscarTodos();
+    }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<TutorDTO> atualizar(@RequestBody DadosAtualizarTutor dados, @PathVariable Long id) {
+        return service.atualizar(dados, id);
     }
 }
