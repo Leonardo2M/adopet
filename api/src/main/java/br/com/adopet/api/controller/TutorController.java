@@ -42,4 +42,10 @@ public class TutorController {
     public ResponseEntity<TutorDTO> atualizar(@RequestBody DadosAtualizarTutor dados, @PathVariable Long id) {
         return service.atualizar(dados, id);
     }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<?> excluir(@PathVariable Long id) {
+        return service.excluir(id);
+    }
 }
