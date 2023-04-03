@@ -6,6 +6,7 @@ import br.com.adopet.api.dto.DadosCadastroTutor;
 import br.com.adopet.api.dto.DadosListagemTutor;
 import br.com.adopet.api.dto.TutorDTO;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +24,7 @@ public class TutorController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<TutorDTO> criarTutor(@RequestBody DadosCadastroTutor dados) {
+    public ResponseEntity<TutorDTO> criarTutor(@RequestBody @Valid DadosCadastroTutor dados) {
         return service.criarTutor(dados);
     }
 
@@ -39,7 +40,7 @@ public class TutorController {
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<TutorDTO> atualizar(@RequestBody DadosAtualizarTutor dados, @PathVariable Long id) {
+    public ResponseEntity<TutorDTO> atualizar(@RequestBody @Valid DadosAtualizarTutor dados, @PathVariable Long id) {
         return service.atualizar(dados, id);
     }
 
