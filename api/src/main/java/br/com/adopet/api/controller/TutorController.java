@@ -1,10 +1,10 @@
 package br.com.adopet.api.controller;
 
 import br.com.adopet.api.domain.service.TutorService;
-import br.com.adopet.api.dto.DadosAtualizarTutor;
-import br.com.adopet.api.dto.DadosCadastroTutor;
-import br.com.adopet.api.dto.DadosListagemTutor;
-import br.com.adopet.api.dto.TutorDTO;
+import br.com.adopet.api.dto.tutor.DadosAtualizarTutor;
+import br.com.adopet.api.dto.tutor.DadosCadastroTutor;
+import br.com.adopet.api.dto.tutor.DadosListagemTutor;
+import br.com.adopet.api.dto.tutor.TutorDTO;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;

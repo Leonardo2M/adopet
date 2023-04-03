@@ -1,6 +1,6 @@
 package br.com.adopet.api.domain.model;
 
-import br.com.adopet.api.dto.DadosAtualizarTutor;
+import br.com.adopet.api.dto.tutor.DadosAtualizarTutor;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

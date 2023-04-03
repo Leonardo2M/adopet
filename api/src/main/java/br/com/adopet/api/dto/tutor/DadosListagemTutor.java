@@ -1,4 +1,4 @@
-package br.com.adopet.api.dto;
+package br.com.adopet.api.dto.tutor;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

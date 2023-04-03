@@ -2,16 +2,13 @@ package br.com.adopet.api.domain.service;
 
 import br.com.adopet.api.domain.model.Tutor;
 import br.com.adopet.api.domain.repository.TutorRepository;
-import br.com.adopet.api.dto.DadosAtualizarTutor;
-import br.com.adopet.api.dto.DadosCadastroTutor;
-import br.com.adopet.api.dto.DadosListagemTutor;
-import br.com.adopet.api.dto.TutorDTO;
-import jakarta.transaction.Transactional;
-import org.apache.coyote.Response;
+import br.com.adopet.api.dto.tutor.DadosAtualizarTutor;
+import br.com.adopet.api.dto.tutor.DadosCadastroTutor;
+import br.com.adopet.api.dto.tutor.DadosListagemTutor;
+import br.com.adopet.api.dto.tutor.TutorDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
