@@ -62,4 +62,16 @@ public class TutorService {
         return ResponseEntity.ok().body(modelMapper.map(tutor, TutorDTO.class));
     }
 
+    public ResponseEntity<TutorDTO> excluir(Long id) {
+        if(!repository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        repository.deleteById(id);
+
+        return ResponseEntity.noContent().build();
+    }
+
+
+
 }
