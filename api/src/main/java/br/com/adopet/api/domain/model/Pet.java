@@ -23,5 +23,7 @@ public class Pet {
     private Integer idade;
     private String endereço;
     private String imagem;
+    @ManyToOne
+    private Abrigo abrigo;
 
 }

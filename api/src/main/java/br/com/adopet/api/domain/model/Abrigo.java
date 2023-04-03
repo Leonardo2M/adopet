@@ -22,4 +22,7 @@ public class Abrigo {
     private Long id;
     private String nome;
 
+    @OneToMany
+    private List<Pet> pets = new ArrayList<>();
+
 }
