@@ -14,7 +14,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode
 @Entity
-@Table(name = "tutores")
+@Table(name = "abrigos")
 public class Abrigo {
 
     @Id
