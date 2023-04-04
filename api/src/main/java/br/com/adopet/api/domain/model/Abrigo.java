@@ -1,5 +1,6 @@
 package br.com.adopet.api.domain.model;
 
+import br.com.adopet.api.dto.abrigo.DadosAtualizarAbrigo;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,4 +26,7 @@ public class Abrigo {
     @OneToMany
     private List<Pet> pets = new ArrayList<>();
 
+    public void atualizar(DadosAtualizarAbrigo dados) {
+        this.nome = dados.getNome();
+    }
 }

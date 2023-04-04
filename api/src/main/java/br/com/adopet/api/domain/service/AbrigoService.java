@@ -3,6 +3,7 @@ package br.com.adopet.api.domain.service;
 import br.com.adopet.api.domain.model.Abrigo;
 import br.com.adopet.api.domain.repository.AbrigoRepository;
 import br.com.adopet.api.dto.abrigo.AbrigoDTO;
+import br.com.adopet.api.dto.abrigo.DadosAtualizarAbrigo;
 import br.com.adopet.api.dto.abrigo.DadosCadatroAbrigo;
 import br.com.adopet.api.dto.abrigo.DadosListagemAbrigo;
 import org.modelmapper.ModelMapper;
@@ -46,5 +47,16 @@ public class AbrigoService {
         }
 
         return ResponseEntity.ok().body(abrigos);
+    }
+
+    public ResponseEntity<AbrigoDTO> atualizar(DadosAtualizarAbrigo dados, Long id) {
+        if(!repository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        var abrigo = repository.getReferenceById(id);
+        abrigo.atualizar(dados);
+
+        return ResponseEntity.ok().body(modelMapper.map(abrigo, AbrigoDTO.class));
     }
 }
