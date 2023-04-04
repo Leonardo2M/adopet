@@ -1,4 +1,4 @@
-package br.com.adopet.api.domain.repository.tutor;
+package br.com.adopet.api.domain.repository;
 
 import br.com.adopet.api.domain.model.Tutor;
 import org.springframework.data.jpa.repository.JpaRepository;
