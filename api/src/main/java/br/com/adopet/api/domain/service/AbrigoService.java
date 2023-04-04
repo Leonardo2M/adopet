@@ -59,4 +59,14 @@ public class AbrigoService {
 
         return ResponseEntity.ok().body(modelMapper.map(abrigo, AbrigoDTO.class));
     }
+
+    public ResponseEntity<?> excluir(Long id) {
+        if(!repository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        repository.deleteById(id);
+
+        return ResponseEntity.noContent().build();
+    }
 }
