@@ -46,4 +46,10 @@ public class AbrigoController {
         return service.atualizar(dados, id);
     }
 
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<?> excluir(@PathVariable Long id) {
+        return service.excluir(id);
+    }
+
 }
