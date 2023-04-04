@@ -4,9 +4,12 @@ import br.com.adopet.api.domain.model.Abrigo;
 import br.com.adopet.api.domain.repository.AbrigoRepository;
 import br.com.adopet.api.dto.abrigo.AbrigoDTO;
 import br.com.adopet.api.dto.abrigo.DadosCadatroAbrigo;
+import br.com.adopet.api.dto.abrigo.DadosListagemAbrigo;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AbrigoService {
@@ -33,5 +36,15 @@ public class AbrigoService {
 
         var abrigo = repository.getReferenceById(id);
         return ResponseEntity.ok().body(modelMapper.map(abrigo, AbrigoDTO.class));
+    }
+
+    public ResponseEntity<List<DadosListagemAbrigo>> buscarTodos() {
+        var abrigos = repository.findAll().stream().map(a -> modelMapper.map(a, DadosListagemAbrigo.class)).toList();
+
+        if(abrigos.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok().body(abrigos);
     }
 }
