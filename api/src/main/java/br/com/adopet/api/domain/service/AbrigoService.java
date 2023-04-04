@@ -27,7 +27,7 @@ public class AbrigoService {
     }
 
     public ResponseEntity<AbrigoDTO> buscarPorId(Long id) {
-        if(repository.existsById(id)) {
+        if(!repository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
 
