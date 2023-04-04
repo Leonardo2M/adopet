@@ -26,5 +26,12 @@ public class AbrigoService {
         return ResponseEntity.ok().body(modelMapper.map(abrigo, AbrigoDTO.class));
     }
 
+    public ResponseEntity<AbrigoDTO> buscarPorId(Long id) {
+        if(repository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
 
+        var abrigo = repository.getReferenceById(id);
+        return ResponseEntity.ok().body(modelMapper.map(abrigo, AbrigoDTO.class));
+    }
 }
