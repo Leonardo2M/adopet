@@ -10,10 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class PetController {
 
     private final PetService service;
-    private final ModelMapper modelMapper;
 
-    public PetController(PetService service, ModelMapper modelMapper) {
+    public PetController(PetService service) {
         this.service = service;
-        this.modelMapper = modelMapper;
     }
+
 }
