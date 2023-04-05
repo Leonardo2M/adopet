@@ -15,7 +15,6 @@ public class PetDTO {
     private String descricao;
     private Boolean adotado = Boolean.FALSE;
     private String idade;
-    private String endereço;
     private String imagem;
 
 }
