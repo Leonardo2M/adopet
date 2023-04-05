@@ -23,9 +23,16 @@ public class PetService {
     }
 
     public ResponseEntity<PetDTO> criar(DadosCadastroPet dados) {
+        if(!abrigoRepository.existsById(dados.getAbrigoId())) {
+            return ResponseEntity.notFound().build();
+        }
+
+        var abrigo = abrigoRepository.getReferenceById(dados.getAbrigoId());
         var pet = modelMapper.map(dados, Pet.class);
+        abrigo.adicionarPet(pet);
         repository.save(pet);
 
         return ResponseEntity.ok().body(modelMapper.map(pet, PetDTO.class));
     }
+
 }

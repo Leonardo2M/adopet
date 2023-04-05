@@ -34,4 +34,9 @@ public class Abrigo {
             this.localizacao = dados.getLocalizacao();;
         }
     }
+
+    public void adicionarPet(Pet pet) {
+        pets.add(pet);
+        pet.setAbrigo(this);
+    }
 }
