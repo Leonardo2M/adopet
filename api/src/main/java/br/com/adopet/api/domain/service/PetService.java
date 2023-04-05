@@ -4,10 +4,13 @@ import br.com.adopet.api.domain.model.Pet;
 import br.com.adopet.api.domain.repository.AbrigoRepository;
 import br.com.adopet.api.domain.repository.PetRepository;
 import br.com.adopet.api.dto.pet.DadosCadastroPet;
+import br.com.adopet.api.dto.pet.DadosListagemPet;
 import br.com.adopet.api.dto.pet.PetDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PetService {
@@ -33,6 +36,16 @@ public class PetService {
         repository.save(pet);
 
         return ResponseEntity.ok().body(modelMapper.map(pet, PetDTO.class));
+    }
+
+    public ResponseEntity<List<DadosListagemPet>> buscarTodos() {
+        var pets = repository.findAll().stream().map(p -> modelMapper.map(p, DadosListagemPet.class)).toList();
+
+        if(pets.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok().body(pets);
     }
 
 }
