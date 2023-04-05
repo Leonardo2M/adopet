@@ -13,9 +13,11 @@ public class DadosCadastroPet {
     @NotBlank
     private String nome;
     @NotBlank
-    private String descrição;
+    private Long abrigoId;
     @NotBlank
-    private Integer idade;
+    private String descricao;
+    @NotBlank
+    private String idade;
     @NotBlank
     private String endereço;
     @NotBlank

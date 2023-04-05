@@ -12,9 +12,9 @@ public class PetDTO {
 
     private Long id;
     private String nome;
-    private String descrição;
+    private String descricao;
     private Boolean adotado = Boolean.FALSE;
-    private Integer idade;
+    private String idade;
     private String endereço;
     private String imagem;
 
