@@ -39,6 +39,16 @@ public class PetService {
         return ResponseEntity.ok().body(modelMapper.map(pet, PetDTO.class));
     }
 
+    public ResponseEntity<PetDTO> buscarPorId(Long id) {
+        if(!repository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        var pet = repository.getReferenceById(id);
+
+        return ResponseEntity.ok().body(modelMapper.map(pet, PetDTO.class));
+    }
+
     public ResponseEntity<List<DadosListagemPet>> buscarTodos() {
         var pets = repository.findAll().stream().map(p -> modelMapper.map(p, DadosListagemPet.class)).toList();
 
