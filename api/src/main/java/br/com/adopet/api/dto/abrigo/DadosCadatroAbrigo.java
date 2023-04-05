@@ -12,5 +12,7 @@ public class DadosCadatroAbrigo {
 
     @NotBlank
     private String nome;
+    @NotBlank
+    private String localizacao;
 
 }

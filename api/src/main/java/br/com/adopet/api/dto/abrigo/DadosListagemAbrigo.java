@@ -12,4 +12,6 @@ public class DadosListagemAbrigo {
     private Long id;
     private String nome;
 
+    private String localizacao;
+
 }

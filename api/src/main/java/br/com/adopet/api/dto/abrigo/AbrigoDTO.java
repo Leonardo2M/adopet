@@ -14,6 +14,7 @@ public class AbrigoDTO {
 
     private Long id;
     private String nome;
+    private String localizacao;
     private List<Pet> pets;
 
 }

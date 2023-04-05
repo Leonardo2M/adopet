@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DadosAtualizarAbrigo {
 
-    @NotBlank
     private String nome;
+    private String localizacao;
 
 }

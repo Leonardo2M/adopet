@@ -22,11 +22,16 @@ public class Abrigo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-
+    private String localizacao;
     @OneToMany
     private List<Pet> pets = new ArrayList<>();
 
     public void atualizar(DadosAtualizarAbrigo dados) {
-        this.nome = dados.getNome();
+        if(dados.getNome() != null) {
+            this.nome = dados.getNome();
+        }
+        if(dados.getLocalizacao() != null) {
+            this.localizacao = dados.getLocalizacao();;
+        }
     }
 }
