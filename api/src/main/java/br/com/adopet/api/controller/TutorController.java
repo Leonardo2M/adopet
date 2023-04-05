@@ -1,4 +1,4 @@
-package br.com.adopet.api.dto.controller;
+package br.com.adopet.api.controller;
 
 import br.com.adopet.api.domain.service.TutorService;
 import br.com.adopet.api.dto.tutor.DadosAtualizarTutor;

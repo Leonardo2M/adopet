@@ -19,7 +19,7 @@ public class Pet {
     private Long id;
     private String nome;
     private String descrição;
-    private Boolean adotado;
+    private Boolean adotado = Boolean.FALSE;
     private Integer idade;
     private String endereço;
     private String imagem;
