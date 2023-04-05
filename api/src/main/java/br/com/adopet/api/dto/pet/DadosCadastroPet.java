@@ -19,8 +19,6 @@ public class DadosCadastroPet {
     @NotBlank
     private String idade;
     @NotBlank
-    private String endereço;
-    @NotBlank
     private String imagem;
 
 }
