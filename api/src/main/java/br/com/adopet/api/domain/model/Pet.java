@@ -1,5 +1,6 @@
 package br.com.adopet.api.domain.model;
 
+import br.com.adopet.api.dto.pet.DadosAtualizarPet;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -28,4 +29,18 @@ public class Pet {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Abrigo abrigo;
 
+    public void atualizar(DadosAtualizarPet dados) {
+        if(dados.getDescricao() != null){
+            this.descricao = dados.getDescricao();
+        }
+        if(dados.getNome() != null){
+            this.nome = dados.getNome();
+        }
+        if(dados.getImagem() != null){
+            this.imagem = dados.getImagem();
+        }
+        if(dados.getIdade() != null) {
+            this.idade = dados.getIdade();
+        }
+    }
 }

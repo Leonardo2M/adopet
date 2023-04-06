@@ -3,6 +3,8 @@ package br.com.adopet.api.domain.service;
 import br.com.adopet.api.domain.model.Pet;
 import br.com.adopet.api.domain.repository.AbrigoRepository;
 import br.com.adopet.api.domain.repository.PetRepository;
+import br.com.adopet.api.dto.abrigo.DadosAtualizarAbrigo;
+import br.com.adopet.api.dto.pet.DadosAtualizarPet;
 import br.com.adopet.api.dto.pet.DadosCadastroPet;
 import br.com.adopet.api.dto.pet.DadosListagemPet;
 import br.com.adopet.api.dto.pet.PetDTO;
@@ -57,4 +59,14 @@ public class PetService {
         return ResponseEntity.ok().body(pets);
     }
 
+    public ResponseEntity<PetDTO> atualizar(DadosAtualizarPet dados, Long id) {
+        if(!repository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        var pet = repository.getReferenceById(id);
+        pet.atualizar(dados);
+
+        return ResponseEntity.ok().body(modelMapper.map(pet, PetDTO.class));
+    }
 }
