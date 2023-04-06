@@ -69,4 +69,14 @@ public class PetService {
 
         return ResponseEntity.ok().body(modelMapper.map(pet, PetDTO.class));
     }
+
+    public ResponseEntity<?> excluir(Long id) {
+        if(!repository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        repository.deleteById(id);
+
+        return ResponseEntity.noContent().build();
+    }
 }
