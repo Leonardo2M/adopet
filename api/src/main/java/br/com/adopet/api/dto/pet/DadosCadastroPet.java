@@ -1,5 +1,6 @@
 package br.com.adopet.api.dto.pet;
 
+import br.com.adopet.api.domain.model.Abrigo;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -14,7 +15,7 @@ public class DadosCadastroPet {
     @NotBlank
     private String nome;
     @NotNull
-    private Long abrigoId;
+    private Abrigo abrigo;
     @NotBlank
     private String descricao;
     @NotBlank

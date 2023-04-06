@@ -1,5 +1,6 @@
 package br.com.adopet.api.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,6 +24,8 @@ public class Pet {
     private String idade;
     private String imagem;
     @ManyToOne
+    @JoinColumn(name = "abrigo_id")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Abrigo abrigo;
 
 }

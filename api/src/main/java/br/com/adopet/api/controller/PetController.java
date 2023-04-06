@@ -28,6 +28,11 @@ public class PetController {
         return service.criar(dados);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<PetDTO> buscarPorId(@PathVariable Long id) {
+        return service.buscarPorId(id);
+    }
+
     @GetMapping
     public ResponseEntity<List<DadosListagemPet>> buscarTodos() {
         return service.buscarTodos();

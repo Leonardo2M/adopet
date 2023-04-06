@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PetDTO {
 
-    private Long id;
     private String nome;
     private String descricao;
     private Boolean adotado = Boolean.FALSE;

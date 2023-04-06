@@ -7,6 +7,7 @@ import br.com.adopet.api.dto.pet.DadosCadastroPet;
 import br.com.adopet.api.dto.pet.DadosListagemPet;
 import br.com.adopet.api.dto.pet.PetDTO;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -26,16 +27,13 @@ public class PetService {
     }
 
     public ResponseEntity<PetDTO> criar(DadosCadastroPet dados) {
-
-        if(!abrigoRepository.existsById(dados.getAbrigoId())) {
+        if(!abrigoRepository.existsById(dados.getAbrigo().getId())) {
             return ResponseEntity.notFound().build();
         }
-
-        var abrigo = abrigoRepository.getReferenceById(dados.getAbrigoId());
+        var abrigo = abrigoRepository.getReferenceById(dados.getAbrigo().getId());
         var pet = modelMapper.map(dados, Pet.class);
         abrigo.adicionarPet(pet);
         repository.save(pet);
-
         return ResponseEntity.ok().body(modelMapper.map(pet, PetDTO.class));
     }
 
