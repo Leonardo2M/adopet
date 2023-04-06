@@ -45,4 +45,9 @@ public class PetController {
         return service.atualizar(dados, id);
     }
 
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<?> deletar(@PathVariable Long id) {
+        return service.excluir(id);
+    }
 }
