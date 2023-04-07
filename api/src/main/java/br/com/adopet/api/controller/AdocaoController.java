@@ -5,10 +5,7 @@ import br.com.adopet.api.dto.doacao.AdocaoDTO;
 import br.com.adopet.api.dto.doacao.DadosRealizarAdocao;
 import jakarta.transaction.Transactional;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/adocao")
@@ -24,6 +21,12 @@ public class AdocaoController {
     @Transactional
     public ResponseEntity<AdocaoDTO> adotar(@RequestBody DadosRealizarAdocao dados) {
         return service.adotar(dados);
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<?> deletar(@PathVariable Long id) {
+        return service.deletar(id);
     }
 
 }
