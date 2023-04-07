@@ -43,4 +43,8 @@ public class Pet {
             this.idade = dados.getIdade();
         }
     }
+
+    public void adotado() {
+        adotado = Boolean.TRUE;
+    }
 }

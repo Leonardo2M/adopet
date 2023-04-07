@@ -33,7 +33,7 @@ public class AdocaoService {
 
         var adocao = new Adocao(tutor, pet);
         adocaoRepository.save(adocao);
-
+        pet.adotado();
         return ResponseEntity.ok().body(modelMapper.map(adocao, AdocaoDTO.class));
     }
 
