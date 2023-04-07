@@ -37,4 +37,14 @@ public class AdocaoService {
         return ResponseEntity.ok().body(modelMapper.map(adocao, AdocaoDTO.class));
     }
 
+    public ResponseEntity<?> deletar(Long id) {
+        if(!adocaoRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        adocaoRepository.deleteById(id);
+
+        return ResponseEntity.noContent().build();
+    }
+
 }
