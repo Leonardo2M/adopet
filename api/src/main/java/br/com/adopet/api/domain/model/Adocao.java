@@ -24,4 +24,8 @@ public class Adocao {
     @OneToOne
     private Tutor tutor;
     private LocalDateTime data = LocalDateTime.now();
+    public Adocao(Tutor tutor, Pet pet) {
+        this.tutor = tutor;
+        this.pet = pet;
+    }
 }
