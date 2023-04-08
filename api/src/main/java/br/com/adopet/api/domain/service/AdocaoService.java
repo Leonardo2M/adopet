@@ -31,6 +31,10 @@ public class AdocaoService {
         var tutor = tutorRepository.findById(dados.getIdTutor()).orElseThrow(NoSuchElementException::new);
         var pet = petRepository.findById(dados.getIdPet()).orElseThrow(NoSuchElementException::new);
 
+        if(pet.isAdoted()) {
+            return ResponseEntity.badRequest().build();
+        }
+
         var adocao = new Adocao(tutor, pet);
         adocaoRepository.save(adocao);
         pet.adotado();
