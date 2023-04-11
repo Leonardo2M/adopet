@@ -9,6 +9,7 @@ import br.com.adopet.api.dto.abrigo.DadosListagemAbrigo;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
@@ -23,11 +24,12 @@ public class AbrigoService {
         this.modelMapper = modelMapper;
     }
 
-    public ResponseEntity<AbrigoDTO> criar(DadosCadatroAbrigo dados) {
+    public ResponseEntity<AbrigoDTO> criar(DadosCadatroAbrigo dados, UriComponentsBuilder uriComponentsBuilder) {
         var abrigo = modelMapper.map(dados, Abrigo.class);
         repository.save(abrigo);
+        var uri = uriComponentsBuilder.path("/abrigos/{id}").buildAndExpand(abrigo.getId()).toUri();
 
-        return ResponseEntity.ok().body(modelMapper.map(abrigo, AbrigoDTO.class));
+        return ResponseEntity.created(uri).body(modelMapper.map(abrigo, AbrigoDTO.class));
     }
 
     public ResponseEntity<AbrigoDTO> buscarPorId(Long id) {
