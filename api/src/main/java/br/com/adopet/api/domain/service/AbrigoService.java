@@ -58,9 +58,8 @@ public class AbrigoService {
 
     public ResponseEntity<?> excluir(Long id) {
         if(!repository.existsById(id)) {
-            return ResponseEntity.notFound().build();
+            throw new AdopetException("Não foi encontrado abrigo com id = " + id);
         }
-
         repository.deleteById(id);
 
         return ResponseEntity.noContent().build();
