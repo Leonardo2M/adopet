@@ -1,5 +1,6 @@
 package br.com.adopet.api.domain.service;
 
+import br.com.adopet.api.domain.exception.AdopetException;
 import br.com.adopet.api.domain.model.Abrigo;
 import br.com.adopet.api.domain.repository.AbrigoRepository;
 import br.com.adopet.api.dto.abrigo.AbrigoDTO;
@@ -33,11 +34,8 @@ public class AbrigoService {
     }
 
     public ResponseEntity<AbrigoDTO> buscarPorId(Long id) {
-        if(!repository.existsById(id)) {
-            return ResponseEntity.notFound().build();
-        }
+        var abrigo = repository.findById(id).orElseThrow(() -> new AdopetException("Não foi encontrado abrigo com id = " + id));
 
-        var abrigo = repository.getReferenceById(id);
         return ResponseEntity.ok().body(modelMapper.map(abrigo, AbrigoDTO.class));
     }
 
@@ -52,11 +50,7 @@ public class AbrigoService {
     }
 
     public ResponseEntity<AbrigoDTO> atualizar(DadosAtualizarAbrigo dados, Long id) {
-        if(!repository.existsById(id)) {
-            return ResponseEntity.notFound().build();
-        }
-
-        var abrigo = repository.getReferenceById(id);
+        var abrigo = repository.findById(id).orElseThrow(() -> new AdopetException("Não foi encontrado abrigo com id = " + id));
         abrigo.atualizar(dados);
 
         return ResponseEntity.ok().body(modelMapper.map(abrigo, AbrigoDTO.class));
