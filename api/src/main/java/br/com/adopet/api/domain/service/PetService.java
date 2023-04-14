@@ -48,7 +48,7 @@ public class PetService {
         var pets = repository.findAll().stream().map(p -> modelMapper.map(p, DadosListagemPet.class)).toList();
 
         if(pets.isEmpty()) {
-            return ResponseEntity.notFound().build();
+           throw new AdopetException("Não foi localizado nenhum pet");
         }
 
         return ResponseEntity.ok().body(pets);
