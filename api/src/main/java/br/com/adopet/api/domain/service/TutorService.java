@@ -55,7 +55,7 @@ public class TutorService {
 
     public ResponseEntity<TutorDTO> excluir(Long id) {
         if(!repository.existsById(id)) {
-            return ResponseEntity.notFound().build();
+            throw new AdopetException("Não existe tutor com id = " + id);
         }
 
         repository.deleteById(id);
