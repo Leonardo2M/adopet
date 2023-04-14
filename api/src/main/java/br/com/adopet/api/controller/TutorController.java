@@ -9,6 +9,7 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
@@ -24,8 +25,8 @@ public class TutorController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<TutorDTO> criarTutor(@RequestBody @Valid DadosCadastroTutor dados) {
-        return service.criarTutor(dados);
+    public ResponseEntity<TutorDTO> criarTutor(@RequestBody @Valid DadosCadastroTutor dados, UriComponentsBuilder uriComponentsBuilder) {
+        return service.criarTutor(dados, uriComponentsBuilder);
     }
 
     @GetMapping("/{id}")

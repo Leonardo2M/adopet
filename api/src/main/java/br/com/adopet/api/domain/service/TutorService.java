@@ -9,6 +9,7 @@ import br.com.adopet.api.dto.tutor.TutorDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
@@ -23,10 +24,11 @@ public class TutorService {
         this.modelMapper = modelMapper;
     }
 
-    public ResponseEntity<TutorDTO> criarTutor(DadosCadastroTutor dados) {
+    public ResponseEntity<TutorDTO> criarTutor(DadosCadastroTutor dados, UriComponentsBuilder uriComponentsBuilder) {
         var tutor = modelMapper.map(dados, Tutor.class);
         repository.save(tutor);
-        return ResponseEntity.ok().body(modelMapper.map(tutor, TutorDTO.class));
+        var uri = uriComponentsBuilder.path("/tutor/{id}").buildAndExpand(tutor.getId()).toUri();
+        return ResponseEntity.created(uri).body(modelMapper.map(tutor, TutorDTO.class));
     }
 
     public ResponseEntity<TutorDTO> buscarPorId(Long id) {
