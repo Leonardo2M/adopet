@@ -2,6 +2,7 @@ package br.com.adopet.api.domain.service;
 
 import br.com.adopet.api.domain.model.Tutor;
 import br.com.adopet.api.domain.repository.TutorRepository;
+import br.com.adopet.api.domain.service.exception.AdopetException;
 import br.com.adopet.api.dto.tutor.DadosAtualizarTutor;
 import br.com.adopet.api.dto.tutor.DadosCadastroTutor;
 import br.com.adopet.api.dto.tutor.DadosListagemTutor;
@@ -32,11 +33,7 @@ public class TutorService {
     }
 
     public ResponseEntity<TutorDTO> buscarPorId(Long id) {
-        if(!repository.existsById(id)) {
-            return ResponseEntity.notFound().build();
-        }
-
-        var tutor = repository.getReferenceById(id);
+        var tutor = repository.findById(id).orElseThrow(() -> new AdopetException("Não existe tutor com id = " + id));
         return ResponseEntity.ok().body(modelMapper.map(tutor, TutorDTO.class));
     }
 
@@ -51,13 +48,8 @@ public class TutorService {
     }
 
     public ResponseEntity<TutorDTO> atualizar(DadosAtualizarTutor dados, Long id) {
-        if(!repository.existsById(id)) {
-            return ResponseEntity.notFound().build();
-        }
-
-        var tutor = repository.getReferenceById(id);
+        var tutor = repository.findById(id).orElseThrow(() -> new AdopetException("Não existe tutor com id = " + id));
         tutor.atualizar(dados);
-
         return ResponseEntity.ok().body(modelMapper.map(tutor, TutorDTO.class));
     }
 
