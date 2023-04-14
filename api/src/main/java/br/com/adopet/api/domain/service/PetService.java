@@ -63,7 +63,7 @@ public class PetService {
 
     public ResponseEntity<?> excluir(Long id) {
         if(!repository.existsById(id)) {
-            return ResponseEntity.notFound().build();
+            throw  new AdopetException("Não foi encontrado pet com id = " + id);
         }
 
         repository.deleteById(id);
