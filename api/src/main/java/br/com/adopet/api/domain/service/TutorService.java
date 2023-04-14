@@ -41,7 +41,7 @@ public class TutorService {
         var tutores = repository.findAll().stream().map(t -> modelMapper.map(t, DadosListagemTutor.class)).toList();
 
         if(tutores.isEmpty()) {
-            return ResponseEntity.notFound().build();
+            throw new AdopetException("Não foi localizado nenhum tutor");
         }
 
         return ResponseEntity.ok().body(tutores);
