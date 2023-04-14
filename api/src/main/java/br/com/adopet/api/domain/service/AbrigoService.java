@@ -43,7 +43,7 @@ public class AbrigoService {
         var abrigos = repository.findAll().stream().map(a -> modelMapper.map(a, DadosListagemAbrigo.class)).toList();
 
         if(abrigos.isEmpty()) {
-            return ResponseEntity.notFound().build();
+            throw new AdopetException("Não foi localizado nenhum abrigo");
         }
 
         return ResponseEntity.ok().body(abrigos);
