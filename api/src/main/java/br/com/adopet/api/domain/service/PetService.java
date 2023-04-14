@@ -40,12 +40,7 @@ public class PetService {
     }
 
     public ResponseEntity<PetDTO> buscarPorId(Long id) {
-        if(!repository.existsById(id)) {
-            return ResponseEntity.notFound().build();
-        }
-
-        var pet = repository.getReferenceById(id);
-
+        var pet = repository.findById(id).orElseThrow(() -> new AdopetException("Não foi encontrado pet com id = " + id));
         return ResponseEntity.ok().body(modelMapper.map(pet, PetDTO.class));
     }
 
@@ -60,11 +55,7 @@ public class PetService {
     }
 
     public ResponseEntity<PetDTO> atualizar(DadosAtualizarPet dados, Long id) {
-        if(!repository.existsById(id)) {
-            return ResponseEntity.notFound().build();
-        }
-
-        var pet = repository.getReferenceById(id);
+        var pet = repository.findById(id).orElseThrow(() -> new AdopetException("Não foi encontrado pet com id = " + id));
         pet.atualizar(dados);
 
         return ResponseEntity.ok().body(modelMapper.map(pet, PetDTO.class));
