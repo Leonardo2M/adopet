@@ -6,6 +6,7 @@ import br.com.adopet.api.dto.doacao.DadosRealizarAdocao;
 import jakarta.transaction.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/adocao")
@@ -19,8 +20,8 @@ public class AdocaoController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<AdocaoDTO> adotar(@RequestBody DadosRealizarAdocao dados) {
-        return service.adotar(dados);
+    public ResponseEntity<AdocaoDTO> adotar(@RequestBody DadosRealizarAdocao dados, UriComponentsBuilder uriComponentsBuilder) {
+        return service.adotar(dados, uriComponentsBuilder);
     }
 
     @DeleteMapping("/{id}")
