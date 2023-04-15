@@ -46,11 +46,10 @@ public class AdocaoService {
 
     public ResponseEntity<?> deletar(Long id) {
         if(!adocaoRepository.existsById(id)) {
-            return ResponseEntity.notFound().build();
+            throw new AdopetException("Não foi encontrado adoção com id = " + id);
         }
 
         adocaoRepository.deleteById(id);
-
         return ResponseEntity.noContent().build();
     }
 
