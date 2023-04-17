@@ -2,6 +2,7 @@ package br.com.adopet.api.domain.service;
 
 import br.com.adopet.api.domain.model.Tutor;
 import br.com.adopet.api.domain.repository.TutorRepository;
+import br.com.adopet.api.domain.service.exception.AdopetException;
 import br.com.adopet.api.dto.tutor.DadosAtualizarTutor;
 import br.com.adopet.api.dto.tutor.DadosCadastroTutor;
 import br.com.adopet.api.dto.tutor.DadosListagemTutor;
@@ -9,6 +10,7 @@ import br.com.adopet.api.dto.tutor.TutorDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
@@ -23,18 +25,15 @@ public class TutorService {
         this.modelMapper = modelMapper;
     }
 
-    public ResponseEntity<TutorDTO> criarTutor(DadosCadastroTutor dados) {
+    public ResponseEntity<TutorDTO> criarTutor(DadosCadastroTutor dados, UriComponentsBuilder uriComponentsBuilder) {
         var tutor = modelMapper.map(dados, Tutor.class);
         repository.save(tutor);
-        return ResponseEntity.ok().body(modelMapper.map(tutor, TutorDTO.class));
+        var uri = uriComponentsBuilder.path("/tutor/{id}").buildAndExpand(tutor.getId()).toUri();
+        return ResponseEntity.created(uri).body(modelMapper.map(tutor, TutorDTO.class));
     }
 
     public ResponseEntity<TutorDTO> buscarPorId(Long id) {
-        if(!repository.existsById(id)) {
-            return ResponseEntity.notFound().build();
-        }
-
-        var tutor = repository.getReferenceById(id);
+        var tutor = repository.findById(id).orElseThrow(() -> new AdopetException("Não existe tutor com id = " + id));
         return ResponseEntity.ok().body(modelMapper.map(tutor, TutorDTO.class));
     }
 
@@ -42,26 +41,21 @@ public class TutorService {
         var tutores = repository.findAll().stream().map(t -> modelMapper.map(t, DadosListagemTutor.class)).toList();
 
         if(tutores.isEmpty()) {
-            return ResponseEntity.notFound().build();
+            throw new AdopetException("Não foi localizado nenhum tutor");
         }
 
         return ResponseEntity.ok().body(tutores);
     }
 
     public ResponseEntity<TutorDTO> atualizar(DadosAtualizarTutor dados, Long id) {
-        if(!repository.existsById(id)) {
-            return ResponseEntity.notFound().build();
-        }
-
-        var tutor = repository.getReferenceById(id);
+        var tutor = repository.findById(id).orElseThrow(() -> new AdopetException("Não existe tutor com id = " + id));
         tutor.atualizar(dados);
-
         return ResponseEntity.ok().body(modelMapper.map(tutor, TutorDTO.class));
     }
 
     public ResponseEntity<TutorDTO> excluir(Long id) {
         if(!repository.existsById(id)) {
-            return ResponseEntity.notFound().build();
+            throw new AdopetException("Não existe tutor com id = " + id);
         }
 
         repository.deleteById(id);

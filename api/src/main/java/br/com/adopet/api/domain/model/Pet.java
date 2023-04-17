@@ -47,4 +47,8 @@ public class Pet {
     public void adotado() {
         adotado = Boolean.TRUE;
     }
+
+    public boolean isAdoted() {
+        return adotado;
+    }
 }

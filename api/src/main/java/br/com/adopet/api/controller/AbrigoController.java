@@ -11,6 +11,7 @@ import jakarta.validation.Valid;
 import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
@@ -26,8 +27,8 @@ public class AbrigoController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<AbrigoDTO> criar(@RequestBody @Valid DadosCadatroAbrigo dados) {
-        return service.criar(dados);
+    public ResponseEntity<AbrigoDTO> criar(@RequestBody @Valid DadosCadatroAbrigo dados, UriComponentsBuilder uriComponentsBuilder) {
+        return service.criar(dados, uriComponentsBuilder);
     }
 
     @GetMapping("/{id}")

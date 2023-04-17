@@ -10,6 +10,7 @@ import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
@@ -25,8 +26,8 @@ public class PetController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<PetDTO> criar(@RequestBody @Valid DadosCadastroPet dados) {
-        return service.criar(dados);
+    public ResponseEntity<PetDTO> criar(@RequestBody @Valid DadosCadastroPet dados, UriComponentsBuilder uriComponentsBuilder) {
+        return service.criar(dados, uriComponentsBuilder);
     }
 
     @GetMapping("/{id}")

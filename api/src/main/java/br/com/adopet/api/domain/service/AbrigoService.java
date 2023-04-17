@@ -1,5 +1,6 @@
 package br.com.adopet.api.domain.service;
 
+import br.com.adopet.api.domain.service.exception.AdopetException;
 import br.com.adopet.api.domain.model.Abrigo;
 import br.com.adopet.api.domain.repository.AbrigoRepository;
 import br.com.adopet.api.dto.abrigo.AbrigoDTO;
@@ -9,6 +10,7 @@ import br.com.adopet.api.dto.abrigo.DadosListagemAbrigo;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
@@ -23,19 +25,17 @@ public class AbrigoService {
         this.modelMapper = modelMapper;
     }
 
-    public ResponseEntity<AbrigoDTO> criar(DadosCadatroAbrigo dados) {
+    public ResponseEntity<AbrigoDTO> criar(DadosCadatroAbrigo dados, UriComponentsBuilder uriComponentsBuilder) {
         var abrigo = modelMapper.map(dados, Abrigo.class);
         repository.save(abrigo);
+        var uri = uriComponentsBuilder.path("/abrigos/{id}").buildAndExpand(abrigo.getId()).toUri();
 
-        return ResponseEntity.ok().body(modelMapper.map(abrigo, AbrigoDTO.class));
+        return ResponseEntity.created(uri).body(modelMapper.map(abrigo, AbrigoDTO.class));
     }
 
     public ResponseEntity<AbrigoDTO> buscarPorId(Long id) {
-        if(!repository.existsById(id)) {
-            return ResponseEntity.notFound().build();
-        }
+        var abrigo = repository.findById(id).orElseThrow(() -> new AdopetException("Não foi encontrado abrigo com id = " + id));
 
-        var abrigo = repository.getReferenceById(id);
         return ResponseEntity.ok().body(modelMapper.map(abrigo, AbrigoDTO.class));
     }
 
@@ -43,18 +43,14 @@ public class AbrigoService {
         var abrigos = repository.findAll().stream().map(a -> modelMapper.map(a, DadosListagemAbrigo.class)).toList();
 
         if(abrigos.isEmpty()) {
-            return ResponseEntity.notFound().build();
+            throw new AdopetException("Não foi localizado nenhum abrigo");
         }
 
         return ResponseEntity.ok().body(abrigos);
     }
 
     public ResponseEntity<AbrigoDTO> atualizar(DadosAtualizarAbrigo dados, Long id) {
-        if(!repository.existsById(id)) {
-            return ResponseEntity.notFound().build();
-        }
-
-        var abrigo = repository.getReferenceById(id);
+        var abrigo = repository.findById(id).orElseThrow(() -> new AdopetException("Não foi encontrado abrigo com id = " + id));
         abrigo.atualizar(dados);
 
         return ResponseEntity.ok().body(modelMapper.map(abrigo, AbrigoDTO.class));
@@ -62,9 +58,8 @@ public class AbrigoService {
 
     public ResponseEntity<?> excluir(Long id) {
         if(!repository.existsById(id)) {
-            return ResponseEntity.notFound().build();
+            throw new AdopetException("Não foi encontrado abrigo com id = " + id);
         }
-
         repository.deleteById(id);
 
         return ResponseEntity.noContent().build();
