@@ -1,4 +1,4 @@
-package br.com.adopet.api.domain.service.exception;
+package br.com.adopet.api.domain.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

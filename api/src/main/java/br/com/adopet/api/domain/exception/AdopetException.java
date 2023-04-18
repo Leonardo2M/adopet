@@ -1,4 +1,4 @@
-package br.com.adopet.api.domain.service.exception;
+package br.com.adopet.api.domain.exception;
 
 public class AdopetException extends  RuntimeException{
 

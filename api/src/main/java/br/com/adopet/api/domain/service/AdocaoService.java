@@ -4,15 +4,13 @@ import br.com.adopet.api.domain.model.Adocao;
 import br.com.adopet.api.domain.repository.AdocaoRepository;
 import br.com.adopet.api.domain.repository.PetRepository;
 import br.com.adopet.api.domain.repository.TutorRepository;
-import br.com.adopet.api.domain.service.exception.AdopetException;
+import br.com.adopet.api.domain.exception.AdopetException;
 import br.com.adopet.api.dto.doacao.AdocaoDTO;
 import br.com.adopet.api.dto.doacao.DadosRealizarAdocao;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import java.util.NoSuchElementException;
 
 @Service
 public class AdocaoService {
