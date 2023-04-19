@@ -1,4 +1,4 @@
-package br.com.adopet.api.domain.service;
+package br.com.adopet.api.domain.service.security;
 
 import br.com.adopet.api.domain.repository.UsuarioRepository;
 import org.springframework.security.core.userdetails.UserDetails;
