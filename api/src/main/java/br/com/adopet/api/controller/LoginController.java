@@ -1,6 +1,9 @@
 package br.com.adopet.api.controller;
 
+import br.com.adopet.api.domain.model.usuario.Usuario;
+import br.com.adopet.api.domain.service.security.TokenService;
 import br.com.adopet.api.dto.usuario.LoginDTO;
+import br.com.adopet.api.dto.usuario.TokenDTO;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
 
     private final AuthenticationManager authenticationManager;
+    private final TokenService tokenService;
 
-    public LoginController(AuthenticationManager authenticationManager) {
+    public LoginController(AuthenticationManager authenticationManager, TokenService tokenService) {
         this.authenticationManager = authenticationManager;
+        this.tokenService = tokenService;
     }
 
     @PostMapping
@@ -27,7 +32,9 @@ public class LoginController {
         var tokenAuth = new UsernamePasswordAuthenticationToken(dadosLogin.getUsername(), dadosLogin.getPassword());
         var authentication = authenticationManager.authenticate(tokenAuth);
 
-        return ResponseEntity.ok().body("logado");
+        var token = tokenService.gerarToken((Usuario) authentication.getPrincipal());
+
+        return ResponseEntity.ok().body(new TokenDTO(token));
     }
 
 }
