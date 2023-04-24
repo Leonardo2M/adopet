@@ -27,7 +27,6 @@ public class TokenService {
                     .withIssuer("API Adopet")
                     .withSubject(usuario.getUsername())
                     .withClaim("id: ", usuario.getId())
-                    .withClaim("role: ", usuario.getTipo().toString())
                     .withExpiresAt(dataExpiracao())
                     .sign(algorithm);
 

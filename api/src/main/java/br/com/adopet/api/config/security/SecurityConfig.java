@@ -1,5 +1,6 @@
 package br.com.adopet.api.config.security;
 
+import br.com.adopet.api.domain.model.usuario.TipoUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,10 +29,15 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeHttpRequests()
                 .requestMatchers(HttpMethod.POST, "/login").permitAll()
-                .requestMatchers(HttpMethod.DELETE, "/adocao").hasAnyRole("ROLE_ABRIGO")
-                .requestMatchers("/abrigo").hasAnyRole("ROLE_ABRIGO")
-                .requestMatchers("/tutores").hasAnyRole("ROLE_TUTOR")
-                .anyRequest().permitAll()
+                .requestMatchers(HttpMethod.POST, "/abrigos").permitAll()
+                .requestMatchers(HttpMethod.POST, "/tutores").permitAll()
+                .requestMatchers(HttpMethod.PUT,"/tutores/**").hasRole("ROLE_TUTOR")
+                .requestMatchers(HttpMethod.DELETE,"/tutores/**").hasRole("ROLE_TUTOR")
+                .requestMatchers(HttpMethod.PUT,"/abrigos/**").hasRole("ROLE_ABRIGO")
+                .requestMatchers(HttpMethod.DELETE,"/abrigos/**").hasRole("ROLE_ABRIGO")
+                .requestMatchers("/pets").hasRole("ROLE_ABRIGO")
+                .requestMatchers("/abrigos").hasRole("ROLE_ABRIGO")
+                .anyRequest().authenticated()
                 .and().addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
