@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 public class AdocaoDTO {
 
     private Long id;
-    private Pet idPet;
-    private Tutor idTutor;
+    private Pet pet;
+    private Tutor tutor;
 }

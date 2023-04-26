@@ -39,7 +39,12 @@ public class AdocaoService {
         adocaoRepository.save(adocao);
         pet.adotado();
         var uri = uriComponentsBuilder.path("/adocao/{id}").buildAndExpand(adocao.getId()).toUri();
-        return ResponseEntity.created(uri).body(modelMapper.map(adocao, AdocaoDTO.class));
+
+        var retorno = modelMapper.map(adocao, AdocaoDTO.class);
+        System.out.println(retorno.getPet().getNome());
+        System.out.println(retorno.getTutor().getNome());
+
+        return ResponseEntity.created(uri).body(retorno);
     }
 
     public ResponseEntity<?> deletar(Long id) {
