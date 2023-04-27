@@ -2,7 +2,7 @@ package br.com.adopet.api.domain.service;
 
 import br.com.adopet.api.domain.model.Tutor;
 import br.com.adopet.api.domain.repository.TutorRepository;
-import br.com.adopet.api.domain.service.exception.AdopetException;
+import br.com.adopet.api.domain.exception.AdopetException;
 import br.com.adopet.api.dto.tutor.DadosAtualizarTutor;
 import br.com.adopet.api.dto.tutor.DadosCadastroTutor;
 import br.com.adopet.api.dto.tutor.DadosListagemTutor;

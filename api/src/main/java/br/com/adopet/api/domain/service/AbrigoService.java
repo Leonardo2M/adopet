@@ -1,6 +1,6 @@
 package br.com.adopet.api.domain.service;
 
-import br.com.adopet.api.domain.service.exception.AdopetException;
+import br.com.adopet.api.domain.exception.AdopetException;
 import br.com.adopet.api.domain.model.Abrigo;
 import br.com.adopet.api.domain.repository.AbrigoRepository;
 import br.com.adopet.api.dto.abrigo.AbrigoDTO;

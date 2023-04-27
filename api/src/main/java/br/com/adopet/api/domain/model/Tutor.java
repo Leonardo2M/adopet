@@ -1,5 +1,6 @@
 package br.com.adopet.api.domain.model;
 
+import br.com.adopet.api.domain.model.usuario.Usuario;
 import br.com.adopet.api.dto.tutor.DadosAtualizarTutor;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -10,10 +11,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "tutores")
-public class Tutor {
+public class Tutor  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

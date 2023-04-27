@@ -20,8 +20,10 @@ public class Adocao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToOne
+    @JoinColumn(name = "pet_id")
     private Pet pet;
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "tutor_id")
     private Tutor tutor;
     private LocalDateTime data = LocalDateTime.now();
     public Adocao(Tutor tutor, Pet pet) {
