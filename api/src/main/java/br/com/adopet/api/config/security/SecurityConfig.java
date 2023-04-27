@@ -1,7 +1,5 @@
 package br.com.adopet.api.config.security;
 
-import br.com.adopet.api.domain.model.usuario.TipoUsuario;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -29,6 +27,17 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeHttpRequests()
                 .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                .requestMatchers(HttpMethod.POST, "/abrigos").permitAll()
+                .requestMatchers(HttpMethod.POST, "/tutores").permitAll()
+                .requestMatchers(HttpMethod.PUT, "/tutores/**").hasRole("TUTOR")
+                .requestMatchers(HttpMethod.DELETE, "/tutores/**").hasRole("TUTOR")
+                .requestMatchers(HttpMethod.PUT, "/abrigos/**").hasRole("ABRIGO")
+                .requestMatchers(HttpMethod.DELETE, "/abrigos/**").hasRole("ABRIGO")
+                .requestMatchers(HttpMethod.POST, "/pets").hasRole("ABRIGO")
+                .requestMatchers(HttpMethod.PUT, "/pets/**").hasRole("ABRIGO")
+                .requestMatchers(HttpMethod.DELETE, "/pets/**").hasRole("ABRIGO")
+                .requestMatchers(HttpMethod.POST, "/adocao").hasRole("ABRIGO")
+                .requestMatchers(HttpMethod.DELETE, "/adocao/**").hasRole("ABRIGO")
                 .anyRequest().authenticated()
                 .and().addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
