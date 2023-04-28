@@ -1,5 +1,7 @@
-package br.com.adopet.api.domain.model;
+package br.com.adopet.api.domain.model.adocao;
 
+import br.com.adopet.api.domain.model.Pet;
+import br.com.adopet.api.domain.model.Tutor;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,6 +1,6 @@
 package br.com.adopet.api.domain.service;
 
-import br.com.adopet.api.domain.model.Adocao;
+import br.com.adopet.api.domain.model.adocao.Adocao;
 import br.com.adopet.api.domain.repository.AdocaoRepository;
 import br.com.adopet.api.domain.repository.PetRepository;
 import br.com.adopet.api.domain.repository.TutorRepository;
@@ -40,11 +40,7 @@ public class AdocaoService {
         pet.adotado();
         var uri = uriComponentsBuilder.path("/adocao/{id}").buildAndExpand(adocao.getId()).toUri();
 
-        var retorno = modelMapper.map(adocao, AdocaoDTO.class);
-        System.out.println(retorno.getPet().getNome());
-        System.out.println(retorno.getTutor().getNome());
-
-        return ResponseEntity.created(uri).body(retorno);
+        return ResponseEntity.created(uri).body(modelMapper.map(adocao, AdocaoDTO.class));
     }
 
     public ResponseEntity<?> deletar(Long id) {
