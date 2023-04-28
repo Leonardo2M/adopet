@@ -11,3 +11,20 @@ O sistema permite que:
 - As organizações podem cadastrar novos animais disponíveis para adoção, com informações sobre a raça, idade e fotos;
 - Pessoas interessadas em adotar podem agendar visitas para conhecer os animais pessoalmente;
 - O sistema permite que as organizações atualizem as informações sobre os animais disponíveis para adoção e as pessoas interessadas podem enviar mensagens para as organizações.
+
+Para executar este projeto, você precisa ter o seguinte software instalado:
+
+- Java 17
+- MySQL 8
+- Maven
+
+## Tecnologias utilizadas
+
+O projeto utiliza as seguintes tecnologias:
+
+- Spring Framework
+- Spring Boot 
+- MySQL
+- Hibernate 
+- Maven 
+
