@@ -64,4 +64,5 @@ public class AbrigoService {
 
         return ResponseEntity.noContent().build();
     }
+
 }

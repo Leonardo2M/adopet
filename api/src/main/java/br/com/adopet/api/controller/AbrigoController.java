@@ -41,7 +41,7 @@ public class AbrigoController {
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<AbrigoDTO> ataulizar(@PathVariable Long id, @RequestBody @Valid DadosAtualizarAbrigo dados) {
+    public ResponseEntity<AbrigoDTO> atualizar(@PathVariable Long id, @RequestBody @Valid DadosAtualizarAbrigo dados) {
         return service.atualizar(dados, id);
     }
 
