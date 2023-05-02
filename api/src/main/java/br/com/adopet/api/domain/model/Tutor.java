@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.URL;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,7 +23,12 @@ public class Tutor  {
     private String nome;
     private String telefone;
     private String cidade;
+    private String estado;
     private String sobre;
+    @URL
+    private String image;
+    @OneToOne
+    private Usuario user;
 
     public void atualizar(DadosAtualizarTutor dados) {
         if(dados.getNome() != null){
